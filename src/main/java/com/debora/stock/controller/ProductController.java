@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable long id) {
-        return "Buscando por ID: " + id;
+    public Product findById(@PathVariable Long id) {
+        return productService.findById(id);
     }
 }
