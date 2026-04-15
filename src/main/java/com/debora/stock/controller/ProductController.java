@@ -2,14 +2,16 @@ package com.debora.stock.controller;
 
 import com.debora.stock.model.Product;
 import com.debora.stock.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/products")
-
+@CrossOrigin(origins = "*")
 public class ProductController {
 
     private final ProductService productService;
@@ -18,23 +20,32 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping
-    public List<Product> listProducts() {
-        return productService.findAll();
+    @PostMapping
+    public ResponseEntity<Product> create(@RequestBody @Valid Product product) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(productService.save(product));
     }
 
-    @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return productService.save(product);
+    @GetMapping
+    public ResponseEntity<List<Product>> findAll() {
+        return ResponseEntity.ok(productService.findAll());
     }
 
     @GetMapping("/{id}")
-    public Product findById(@PathVariable Long id) {
-        return productService.findById(id);
+    public ResponseEntity<Product> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.findById(id));
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
-        return productService.update(id, product);
+    public ResponseEntity<Product> update(
+            @PathVariable Long id,
+            @RequestBody @Valid Product product) {
+        return ResponseEntity.ok(productService.update(id, product));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        productService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

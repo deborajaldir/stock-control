@@ -1,5 +1,6 @@
 package com.debora.stock.service;
 
+import com.debora.stock.exception.ResourceNotFoundException;
 import com.debora.stock.model.Product;
 import com.debora.stock.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -15,21 +16,18 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product save (Product p) {
-        return productRepository.save(p);
-    }
-
     public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    public List<Product> findByName(String name) {
-        return productRepository.findByNameContainingIgnoreCase(name);
+    public Product findById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Product not found with id: " + id));
     }
 
-    public Product findById(long id) {
-        return productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+    public Product save(Product product) {
+        return productRepository.save(product);
     }
 
     public Product update(Long id, Product p) {
@@ -41,5 +39,10 @@ public class ProductService {
         existingProduct.setCategory(p.getCategory());
 
         return productRepository.save(existingProduct);
+    }
+
+    public void delete(Long id) {
+        Product product = findById(id);
+        productRepository.delete(product);
     }
 }

@@ -1,19 +1,34 @@
 package com.debora.stock.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "The product name is required.")
+    @Column(nullable = false)
     private String name;
-    private int quantity;
+
+    @NotNull(message = "Quantity is mandatory.")
+    @PositiveOrZero(message = "The quantity cannot be negative.")
+    @Column(nullable = false)
+    private Integer quantity;
+
+    @NotNull(message = "Price is mandatory.")
+    @DecimalMin(value = "0.01", message = "The price must be greater than zero.")
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
+
+    @NotBlank(message = "Category is required.")
+    @Column(nullable = false)
     private String category;
 
     public Long getId() {
@@ -32,11 +47,11 @@ public class Product {
         this.name = name;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
