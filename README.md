@@ -1,6 +1,8 @@
 # 📦 Stock Control API
 
-API REST para gerenciamento de produtos em estoque, desenvolvida com foco em boas práticas de arquitetura, validação de dados e documentação.
+API REST para gerenciamento de produtos em estoque.
+
+> API REST for stock management, built with Spring Boot, featuring validation, exception handling and API documentation.
 
 ---
 
