@@ -1,74 +1,118 @@
-# 📦 Sistema de Controle de Estoque
+# 📦 Stock Control API
 
-Aplicação **full stack** para gerenciamento de produtos e controle de estoque, desenvolvida com foco em organização de dados, regras de negócio e integração entre front-end e back-end.
+API REST para gerenciamento de produtos em estoque, desenvolvida com foco em boas práticas de arquitetura, validação de dados e documentação.
 
 ---
 
 ## 🚀 Funcionalidades
 
-* **CRUD Completo:** Cadastro, listagem, edição e exclusão de produtos.
-* **Movimentação:** Controle de entradas e saídas de estoque.
-* **Segurança:** Validação de dados no back-end.
-* **Integração:** Conexão direta entre API e interface web.
-* **Padronização:** Estrutura organizada em camadas (Controller, Service, Repository).
+- Criar produto
+- Listar todos os produtos
+- Buscar produto por ID
+- Atualizar produto
+- Deletar produto
+- Validação de dados com Bean Validation
+- Tratamento global de exceções
+- Documentação interativa com Swagger
 
 ---
 
 ## 🛠️ Tecnologias
 
-| Back-end | Front-end | Outros |
-| :--- | :--- | :--- |
-| Java / Spring Boot | React | Git |
-| Spring Data JPA | JavaScript | Docker |
-| API REST / PostgreSQL | CSS | NPM |
+- Java 17
+- Spring Boot
+- Spring Data JPA
+- PostgreSQL
+- Swagger (OpenAPI)
+- Maven
 
 ---
 
 ## 🧠 Arquitetura
 
-O back-end foi estruturado seguindo o padrão em camadas para facilitar a manutenção:
+O projeto segue o padrão em camadas:
 
-* **Controller:** Responsável pelas requisições HTTP.
-* **Service:** Onde ficam as regras de negócio.
-* **Repository:** Camada de acesso ao banco de dados.
+- Controller → recebe requisições HTTP
+- Service → regras de negócio
+- Repository → acesso ao banco de dados
 
 ---
 
-## 🔗 Repositórios
+## 📚 Documentação da API
 
-* **API (Back-end):** [stock-control](https://github.com/deborajaldir/stock-control)
-* **Interface (Front-end):** [stock-control-frontend](https://github.com/deborajaldir/stock-control-frontend)
+A API possui documentação interativa via Swagger:
+
+http://localhost:8080/swagger-ui/index.html
+
+---
+
+## 📷 Preview
+
+### 🔹 API Overview
+![Swagger](./swagger.png)
+
+### 🔹 Example request & response (error handling)
+![Swagger Test](./swagger-test.png)
 
 ---
 
 ## ▶️ Como executar o projeto
 
-### **Back-end**
-1.  Clone o repositório:
-    ```bash
-    git clone https://github.com/deborajaldir/stock-control.git
-    ```
-2.  Configure o banco de dados **PostgreSQL**.
-3.  Execute a aplicação Spring Boot.
+### 1. Clonar o repositório
 
-### **Front-end**
-1.  Clone o repositório:
-    ```bash
-    git clone https://github.com/deborajaldir/stock-control-frontend.git
-    ```
-2.  Instale as dependências:
-    ```bash
-    npm install
-    ```
-3.  Inicie o servidor de desenvolvimento:
-    ```bash
-    npm run dev
-    ```
+git clone https://github.com/deborajaldir/stock-control.git
+
+### 2. Configurar o banco de dados
+
+No arquivo application.properties:
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/seu_banco  
+spring.datasource.username=seu_usuario  
+spring.datasource.password=sua_senha
+
+### 3. Rodar a aplicação
+
+mvn spring-boot:run
+
+---
+
+## 🔍 Exemplo de requisição
+
+### Criar produto
+
+{
+"name": "Laptop Dell",
+"quantity": 10,
+"price": 3500.00,
+"category": "Electronics"
+}
+
+---
+
+## ⚠️ Tratamento de erros
+
+A API retorna erros padronizados:
+
+{
+"status": 404,
+"error": "Resource Not Found",
+"message": "Product not found with id: 1",
+"path": "/products/1"
+}
 
 ---
 
 ## 📌 Status do projeto
-⚠️ **Em desenvolvimento** — melhorias contínuas sendo aplicadas.
+
+✅ Backend finalizado  
+🚧 Front-end em desenvolvimento
+
+---
+
+## 👩‍💻 Autora
+
+Débora Jaldir
+
 
 ## 💡 Objetivo
 Este projeto foi desenvolvido para consolidar conhecimentos em desenvolvimento **full stack**, focando na construção de APIs, integração com bancos de dados e interfaces web modernas.
