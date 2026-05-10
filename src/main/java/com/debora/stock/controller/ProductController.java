@@ -67,6 +67,17 @@ public class ProductController {
         return ResponseEntity.ok(productService.findById(id));
     }
 
+    @GetMapping("/search/name-category")
+    public ResponseEntity<Product> findByNameAndCategory(
+            @RequestParam String name,
+            @RequestParam String category) {
+
+        return productService
+                .findByNameAndCategory(name, category)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @Operation(summary = "Update an existing product")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Product updated successfully",

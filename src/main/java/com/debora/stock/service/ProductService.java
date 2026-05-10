@@ -6,6 +6,7 @@ import com.debora.stock.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -27,6 +28,26 @@ public class ProductService {
     }
 
     public Product save(Product product) {
+
+        String name = product.getName().trim();
+        String category = product.getCategory().trim();
+
+        var existingProduct =
+                productRepository.findByNameIgnoreCaseAndCategoryIgnoreCase(name, category);
+
+        if (existingProduct.isPresent()) {
+            Product existing = existingProduct.get();
+
+            existing.setQuantity(existing.getQuantity() + product.getQuantity());
+
+            existing.setPrice(product.getPrice());
+
+            return productRepository.save(existing);
+        }
+
+        product.setName(name);
+        product.setCategory(category);
+
         return productRepository.save(product);
     }
 
@@ -44,5 +65,10 @@ public class ProductService {
     public void delete(Long id) {
         Product product = findById(id);
         productRepository.delete(product);
+    }
+
+    public Optional<Product> findByNameAndCategory(String name, String category) {
+        return productRepository
+                .findByNameIgnoreCaseAndCategoryIgnoreCase(name, category);
     }
 }
