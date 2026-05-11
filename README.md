@@ -2,7 +2,7 @@
 
 API REST para gerenciamento de produtos em estoque.
 
-> API REST for stock management, built with Spring Boot, featuring validation, exception handling and API documentation.
+> REST API for stock management, built with Spring Boot, featuring validation, exception handling, PostgreSQL integration and interactive API documentation.
 
 ---
 
@@ -11,11 +11,27 @@ API REST para gerenciamento de produtos em estoque.
 - Criar produto
 - Listar todos os produtos
 - Buscar produto por ID
+- Buscar produto por nome e categoria
 - Atualizar produto
 - Deletar produto
 - Validação de dados com Bean Validation
 - Tratamento global de exceções
-- Documentação interativa com Swagger
+- Documentação interativa com Swagger/OpenAPI
+- Integração com PostgreSQL
+- Deploy em produção
+
+---
+
+## 🌐 Deploy
+
+### 🔹 Frontend
+https://stock-control-frontend.vercel.app
+
+### 🔹 Backend API
+https://stock-control-api-owvi.onrender.com
+
+### 🔹 Swagger Documentation
+https://stock-control-api-owvi.onrender.com/swagger-ui/index.html
 
 ---
 
@@ -25,8 +41,10 @@ API REST para gerenciamento de produtos em estoque.
 - Spring Boot
 - Spring Data JPA
 - PostgreSQL
+- Docker
 - Swagger (OpenAPI)
 - Maven
+- Render
 
 ---
 
@@ -44,7 +62,15 @@ O projeto segue o padrão em camadas:
 
 A API possui documentação interativa via Swagger:
 
+### Ambiente local
+```txt
 http://localhost:8080/swagger-ui/index.html
+```
+
+### Produção
+```txt
+https://stock-control-api-owvi.onrender.com/swagger-ui/index.html
+```
 
 ---
 
@@ -62,19 +88,45 @@ http://localhost:8080/swagger-ui/index.html
 
 ### 1. Clonar o repositório
 
+```bash
 git clone https://github.com/deborajaldir/stock-control.git
+```
 
-### 2. Configurar o banco de dados
+---
 
-No arquivo application.properties:
+### 2. Entrar na pasta do projeto
 
-spring.datasource.url=jdbc:postgresql://localhost:5432/seu_banco  
-spring.datasource.username=seu_usuario  
-spring.datasource.password=sua_senha
+```bash
+cd stock-control
+```
 
-### 3. Rodar a aplicação
+---
 
-mvn spring-boot:run
+### 3. Configurar as variáveis de ambiente
+
+No arquivo `application.yml`:
+
+```yml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/seu_banco
+    username: seu_usuario
+    password: sua_senha
+```
+
+---
+
+### 4. Rodar a aplicação
+
+#### Windows
+```bash
+mvnw.cmd spring-boot:run
+```
+
+#### Linux/Mac
+```bash
+./mvnw spring-boot:run
+```
 
 ---
 
@@ -82,12 +134,14 @@ mvn spring-boot:run
 
 ### Criar produto
 
+```json
 {
-"name": "Laptop Dell",
-"quantity": 10,
-"price": 3500.00,
-"category": "Electronics"
+  "name": "Laptop Dell",
+  "quantity": 10,
+  "price": 3500.00,
+  "category": "Electronics"
 }
+```
 
 ---
 
@@ -95,19 +149,23 @@ mvn spring-boot:run
 
 A API retorna erros padronizados:
 
+```json
 {
-"status": 404,
-"error": "Resource Not Found",
-"message": "Product not found with id: 1",
-"path": "/products/1"
+  "status": 404,
+  "error": "Resource Not Found",
+  "message": "Product not found with id: 1",
+  "path": "/products/1"
 }
+```
 
 ---
 
 ## 📌 Status do projeto
 
 ✅ Backend finalizado  
-🚧 Front-end em desenvolvimento
+✅ Frontend integrado  
+✅ Deploy realizado  
+✅ Projeto em produção
 
 ---
 
@@ -115,6 +173,11 @@ A API retorna erros padronizados:
 
 Débora Jaldir
 
+- GitHub: https://github.com/deborajaldir
+- LinkedIn: (adicione seu link aqui depois)
+
+---
 
 ## 💡 Objetivo
-Este projeto foi desenvolvido para consolidar conhecimentos em desenvolvimento **full stack**, focando na construção de APIs, integração com bancos de dados e interfaces web modernas.
+
+Este projeto foi desenvolvido para consolidar conhecimentos em desenvolvimento full stack, focando na construção de APIs REST, integração com banco de dados PostgreSQL, deploy de aplicações e comunicação entre frontend e backend.
