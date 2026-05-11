@@ -10,7 +10,6 @@ API REST para gerenciamento de produtos em estoque.
 
 - Criar produto
 - Listar todos os produtos
-- Buscar produto por ID
 - Buscar produto por nome e categoria
 - Atualizar produto
 - Deletar produto
@@ -174,7 +173,7 @@ A API retorna erros padronizados:
 Débora Jaldir
 
 - GitHub: https://github.com/deborajaldir
-- LinkedIn: (adicione seu link aqui depois)
+- LinkedIn: https://www.linkedin.com/in/deborajaldir/
 
 ---
 
